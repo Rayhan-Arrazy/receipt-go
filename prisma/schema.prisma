@@ -1,0 +1,26 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Prisma 7: Use "prisma-client-js" with an adapter for direct PostgreSQL connections
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Receipt {
+  id        String   @id @default(cuid())
+  storeName String
+  amount    Float
+  date      DateTime
+  category  String
+  imageUrl  String?
+  notes     String?
+  currency  String   @default("USD")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("receipts")
+}
