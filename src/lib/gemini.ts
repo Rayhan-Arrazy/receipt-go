@@ -31,7 +31,7 @@ export async function extractReceiptData(
   }
 
   const genAI = new GoogleGenerativeAI(apiKey);
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
   const prompt = `You are a receipt data extractor. Analyze this receipt image and extract the following information in JSON format.
 
