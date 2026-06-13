@@ -25,14 +25,7 @@ export default function RootLayout({
         {children}
         <Toaster
           position="top-right"
-          theme="dark"
-          toastOptions={{
-            style: {
-              background: "rgba(15, 15, 30, 0.95)",
-              border: "1px solid rgba(255, 255, 255, 0.1)",
-              color: "#f1f5f9",
-            },
-          }}
+          theme="light"
         />
       </body>
     </html>

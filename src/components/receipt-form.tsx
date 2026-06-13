@@ -143,12 +143,12 @@ export function ReceiptForm() {
       {/* Image Upload Section */}
       <div className="glass-card rounded-2xl p-6 space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-white">Receipt Image</h2>
+          <h2 className="text-lg font-semibold text-foreground">Receipt Image</h2>
           {isExtracted && (
             <button
               type="button"
               onClick={resetForm}
-              className="text-slate-400 hover:text-white text-sm flex items-center gap-1.5 transition-colors"
+              className="text-muted-foreground hover:text-foreground text-sm flex items-center gap-1.5 transition-colors"
             >
               <RefreshCcw className="w-3.5 h-3.5" />
               Reset
@@ -165,9 +165,9 @@ export function ReceiptForm() {
       {/* Form Fields Section */}
       <div className="glass-card rounded-2xl p-6 space-y-5">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-white">Receipt Details</h2>
+          <h2 className="text-lg font-semibold text-foreground">Receipt Details</h2>
           {isExtracted && (
-            <span className="text-xs text-violet-400 bg-violet-500/10 border border-violet-500/20 px-2.5 py-1 rounded-full">
+            <span className="text-xs text-primary bg-primary/10 border border-primary/20 px-2.5 py-1 rounded-full font-medium">
               ✨ AI Extracted
             </span>
           )}
@@ -176,15 +176,15 @@ export function ReceiptForm() {
         <div className="grid grid-cols-1 gap-5">
           {/* Store Name */}
           <div className="space-y-2">
-            <Label htmlFor="storeName" className="text-slate-300">
-              Store Name <span className="text-red-400">*</span>
+            <Label htmlFor="storeName" className="text-foreground">
+              Store Name <span className="text-destructive">*</span>
             </Label>
             <Input
               id="storeName"
               value={formData.storeName}
               onChange={(e) => handleField("storeName", e.target.value)}
               placeholder="e.g. Walmart, McDonald's"
-              className="bg-white/5 border-white/10 text-white placeholder:text-slate-500 focus:border-violet-500 focus:ring-violet-500/20"
+              className="bg-white border-border text-foreground focus:border-primary focus:ring-primary/20"
               required
             />
           </div>
@@ -192,8 +192,8 @@ export function ReceiptForm() {
           {/* Amount + Currency */}
           <div className="grid grid-cols-3 gap-3">
             <div className="col-span-2 space-y-2">
-              <Label htmlFor="amount" className="text-slate-300">
-                Amount <span className="text-red-400">*</span>
+              <Label htmlFor="amount" className="text-foreground">
+                Amount <span className="text-destructive">*</span>
               </Label>
               <Input
                 id="amount"
@@ -203,24 +203,24 @@ export function ReceiptForm() {
                 value={formData.amount}
                 onChange={(e) => handleField("amount", e.target.value)}
                 placeholder="0.00"
-                className="bg-white/5 border-white/10 text-white placeholder:text-slate-500 focus:border-violet-500 focus:ring-violet-500/20"
+                className="bg-white border-border text-foreground focus:border-primary focus:ring-primary/20"
                 required
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="currency" className="text-slate-300">
+              <Label htmlFor="currency" className="text-foreground">
                 Currency
               </Label>
               <Select
                 value={formData.currency}
                 onValueChange={(v) => handleField("currency", v ?? "USD")}
               >
-                <SelectTrigger id="currency" className="bg-white/5 border-white/10 text-white">
+                <SelectTrigger id="currency" className="bg-white border-border text-foreground">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="bg-slate-900 border-white/10">
+                <SelectContent>
                   {["USD", "EUR", "GBP", "IDR", "JPY", "SGD", "AUD", "CAD"].map((c) => (
-                    <SelectItem key={c} value={c} className="text-slate-200 hover:text-white">
+                    <SelectItem key={c} value={c} className="hover:text-primary">
                       {c}
                     </SelectItem>
                   ))}
@@ -231,37 +231,37 @@ export function ReceiptForm() {
 
           {/* Date */}
           <div className="space-y-2">
-            <Label htmlFor="date" className="text-slate-300">
-              Date <span className="text-red-400">*</span>
+            <Label htmlFor="date" className="text-foreground">
+              Date <span className="text-destructive">*</span>
             </Label>
             <Input
               id="date"
               type="date"
               value={formData.date}
               onChange={(e) => handleField("date", e.target.value)}
-              className="bg-white/5 border-white/10 text-white focus:border-violet-500 focus:ring-violet-500/20 [color-scheme:dark]"
+              className="bg-white border-border text-foreground focus:border-primary focus:ring-primary/20"
               required
             />
           </div>
 
           {/* Category */}
           <div className="space-y-2">
-            <Label htmlFor="category" className="text-slate-300">
-              Category <span className="text-red-400">*</span>
+            <Label htmlFor="category" className="text-foreground">
+              Category <span className="text-destructive">*</span>
             </Label>
             <Select
               value={formData.category}
               onValueChange={(v) => handleField("category", v ?? "")}
             >
-              <SelectTrigger id="category" className="bg-white/5 border-white/10 text-white">
+              <SelectTrigger id="category" className="bg-white border-border text-foreground">
                 <SelectValue placeholder="Select a category" />
               </SelectTrigger>
-              <SelectContent className="bg-slate-900 border-white/10">
+              <SelectContent>
                 {CATEGORIES.map((cat) => (
                   <SelectItem
                     key={cat.value}
                     value={cat.value}
-                    className="text-slate-200 hover:text-white"
+                    className="hover:text-primary"
                   >
                     {cat.label}
                   </SelectItem>
@@ -272,8 +272,8 @@ export function ReceiptForm() {
 
           {/* Notes */}
           <div className="space-y-2">
-            <Label htmlFor="notes" className="text-slate-300">
-              Notes <span className="text-slate-500 text-xs">(optional)</span>
+            <Label htmlFor="notes" className="text-foreground">
+              Notes <span className="text-muted-foreground text-xs">(optional)</span>
             </Label>
             <Textarea
               id="notes"
@@ -281,7 +281,7 @@ export function ReceiptForm() {
               onChange={(e) => handleField("notes", e.target.value)}
               placeholder="Any additional notes..."
               rows={3}
-              className="bg-white/5 border-white/10 text-white placeholder:text-slate-500 focus:border-violet-500 focus:ring-violet-500/20 resize-none"
+              className="bg-white border-border text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-primary/20 resize-none"
             />
           </div>
         </div>
@@ -292,16 +292,16 @@ export function ReceiptForm() {
         id="save-receipt-btn"
         type="submit"
         disabled={isSaving || isExtracting}
-        className="w-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-semibold py-4 rounded-xl shadow-lg shadow-violet-500/25 transition-all duration-300 hover:shadow-violet-500/40 hover:scale-[1.01] disabled:opacity-50 disabled:scale-100"
+        className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-6 rounded-xl shadow-lg shadow-primary/25 transition-all duration-300 hover:shadow-primary/40 hover:-translate-y-0.5 disabled:opacity-50 disabled:transform-none"
       >
         {isSaving ? (
           <>
-            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+            <Loader2 className="w-5 h-5 mr-2 animate-spin" />
             Saving Receipt...
           </>
         ) : (
           <>
-            <Save className="w-4 h-4 mr-2" />
+            <Save className="w-5 h-5 mr-2" />
             Save Receipt
           </>
         )}

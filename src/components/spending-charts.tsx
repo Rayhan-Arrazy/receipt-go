@@ -40,9 +40,9 @@ interface CategoryData {
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-slate-900 border border-white/10 rounded-xl p-3 shadow-xl">
-        <p className="text-slate-400 text-xs mb-1">{label}</p>
-        <p className="text-white font-bold">{formatCurrency(payload[0].value)}</p>
+      <div className="bg-white border border-border rounded-xl p-3 shadow-xl">
+        <p className="text-muted-foreground text-xs mb-1">{label}</p>
+        <p className="text-foreground font-bold">{formatCurrency(payload[0].value)}</p>
       </div>
     );
   }
@@ -53,10 +53,10 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 const PieTooltip = ({ active, payload }: any) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-slate-900 border border-white/10 rounded-xl p-3 shadow-xl">
-        <p className="text-white font-semibold text-sm">{payload[0].name}</p>
-        <p className="text-slate-300 text-sm">{formatCurrency(payload[0].value)}</p>
-        <p className="text-slate-400 text-xs">{payload[0].payload.count} receipts</p>
+      <div className="bg-white border border-border rounded-xl p-3 shadow-xl">
+        <p className="text-foreground font-semibold text-sm">{payload[0].name}</p>
+        <p className="text-muted-foreground text-sm">{formatCurrency(payload[0].value)}</p>
+        <p className="text-muted-foreground text-xs">{payload[0].payload.count} receipts</p>
       </div>
     );
   }
@@ -109,12 +109,12 @@ export function SpendingCharts({ receipts }: SpendingChartsProps) {
 
   if (receipts.length === 0) {
     return (
-      <div className="glass-card rounded-2xl p-10 flex flex-col items-center justify-center gap-3 text-center">
-        <div className="p-4 rounded-2xl bg-white/5">
-          <TrendingUp className="w-8 h-8 text-slate-500" />
+      <div className="glass-card rounded-2xl p-10 flex flex-col items-center justify-center gap-3 text-center border-border">
+        <div className="p-4 rounded-2xl bg-slate-100">
+          <TrendingUp className="w-8 h-8 text-muted-foreground" />
         </div>
-        <p className="text-slate-400 font-medium">No spending data yet</p>
-        <p className="text-slate-500 text-sm">Upload receipts to see your spending analysis</p>
+        <p className="text-foreground font-medium">No spending data yet</p>
+        <p className="text-muted-foreground text-sm">Upload receipts to see your spending analysis</p>
       </div>
     );
   }
@@ -122,38 +122,38 @@ export function SpendingCharts({ receipts }: SpendingChartsProps) {
   return (
     <div className="space-y-6">
       {/* Total Summary */}
-      <div className="glass-card rounded-2xl p-6">
+      <div className="glass-card rounded-2xl p-6 border-border">
         <div className="flex items-center gap-3 mb-2">
-          <TrendingUp className="w-5 h-5 text-violet-400" />
-          <h3 className="text-white font-semibold">Total Spending</h3>
+          <TrendingUp className="w-5 h-5 text-primary" />
+          <h3 className="text-foreground font-semibold">Total Spending</h3>
         </div>
-        <p className="text-3xl font-bold text-white">{formatCurrency(totalSpending)}</p>
-        <p className="text-slate-400 text-sm mt-1">across {receipts.length} receipts</p>
+        <p className="text-3xl font-bold text-foreground">{formatCurrency(totalSpending)}</p>
+        <p className="text-muted-foreground text-sm mt-1">across {receipts.length} receipts</p>
       </div>
 
       {/* Monthly Bar Chart */}
       {monthlyData.length > 0 && (
-        <div className="glass-card rounded-2xl p-6">
+        <div className="glass-card rounded-2xl p-6 border-border">
           <div className="flex items-center gap-3 mb-5">
-            <BarChart2 className="w-5 h-5 text-violet-400" />
-            <h3 className="text-white font-semibold">Monthly Spending</h3>
+            <BarChart2 className="w-5 h-5 text-primary" />
+            <h3 className="text-foreground font-semibold">Monthly Spending</h3>
           </div>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={monthlyData} margin={{ top: 0, right: 0, left: -10, bottom: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.05)" />
               <XAxis
                 dataKey="month"
-                tick={{ fill: "#94a3b8", fontSize: 12 }}
-                axisLine={{ stroke: "rgba(255,255,255,0.1)" }}
+                tick={{ fill: "#64748b", fontSize: 12 }}
+                axisLine={{ stroke: "rgba(0,0,0,0.1)" }}
                 tickLine={false}
               />
               <YAxis
-                tick={{ fill: "#94a3b8", fontSize: 12 }}
-                axisLine={{ stroke: "rgba(255,255,255,0.1)" }}
+                tick={{ fill: "#64748b", fontSize: 12 }}
+                axisLine={{ stroke: "rgba(0,0,0,0.1)" }}
                 tickLine={false}
                 tickFormatter={(v) => `$${v}`}
               />
-              <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(255,255,255,0.04)" }} />
+              <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(0,0,0,0.04)" }} />
               <Bar
                 dataKey="total"
                 fill="url(#barGradient)"
@@ -161,8 +161,8 @@ export function SpendingCharts({ receipts }: SpendingChartsProps) {
               />
               <defs>
                 <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#8b5cf6" />
-                  <stop offset="100%" stopColor="#6366f1" />
+                  <stop offset="0%" stopColor="#02A95C" />
+                  <stop offset="100%" stopColor="#87290F" />
                 </linearGradient>
               </defs>
             </BarChart>
@@ -172,10 +172,10 @@ export function SpendingCharts({ receipts }: SpendingChartsProps) {
 
       {/* Category Pie Chart */}
       {categoryData.length > 0 && (
-        <div className="glass-card rounded-2xl p-6">
+        <div className="glass-card rounded-2xl p-6 border-border">
           <div className="flex items-center gap-3 mb-5">
-            <PieChartIcon className="w-5 h-5 text-violet-400" />
-            <h3 className="text-white font-semibold">By Category</h3>
+            <PieChartIcon className="w-5 h-5 text-primary" />
+            <h3 className="text-foreground font-semibold">By Category</h3>
           </div>
           <ResponsiveContainer width="100%" height={240}>
             <PieChart>
@@ -195,7 +195,7 @@ export function SpendingCharts({ receipts }: SpendingChartsProps) {
               <Tooltip content={<PieTooltip />} />
               <Legend
                 formatter={(value) => (
-                  <span style={{ color: "#94a3b8", fontSize: 12 }}>{value}</span>
+                  <span style={{ color: "#64748b", fontSize: 12 }}>{value}</span>
                 )}
               />
             </PieChart>
@@ -210,10 +210,10 @@ export function SpendingCharts({ receipts }: SpendingChartsProps) {
                     className="w-2.5 h-2.5 rounded-full"
                     style={{ backgroundColor: cat.color }}
                   />
-                  <span className="text-slate-300 text-sm">{cat.name}</span>
-                  <span className="text-slate-500 text-xs">({cat.count})</span>
+                  <span className="text-foreground text-sm font-medium">{cat.name}</span>
+                  <span className="text-muted-foreground text-xs">({cat.count})</span>
                 </div>
-                <span className="text-white text-sm font-medium">
+                <span className="text-foreground text-sm font-bold">
                   {formatCurrency(cat.total)}
                 </span>
               </div>

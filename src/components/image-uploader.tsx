@@ -121,34 +121,34 @@ export function ImageUploader({ onExtracted, isLoading, setIsLoading }: ImageUpl
           className={`
             relative flex flex-col items-center justify-center gap-4
             border-2 border-dashed rounded-2xl p-10 cursor-pointer
-            transition-all duration-300 group
+            transition-all duration-300 group bg-white
             ${isDragging
-              ? "border-violet-400 bg-violet-500/10 scale-[1.01]"
-              : "border-white/20 hover:border-violet-400/60 hover:bg-white/5"
+              ? "border-primary bg-primary/5 scale-[1.01]"
+              : "border-border hover:border-primary/50 hover:bg-slate-50"
             }
           `}
         >
           <div className={`
             p-5 rounded-2xl transition-all duration-300
-            ${isDragging ? "bg-violet-500/20" : "bg-white/10 group-hover:bg-violet-500/10"}
+            ${isDragging ? "bg-primary/20" : "bg-slate-100 group-hover:bg-primary/10"}
           `}>
-            <Upload className={`w-8 h-8 transition-colors ${isDragging ? "text-violet-400" : "text-slate-400 group-hover:text-violet-400"}`} />
+            <Upload className={`w-8 h-8 transition-colors ${isDragging ? "text-primary" : "text-muted-foreground group-hover:text-primary"}`} />
           </div>
           <div className="text-center">
-            <p className="text-white font-semibold text-lg">
+            <p className="text-foreground font-semibold text-lg">
               {isDragging ? "Drop your receipt here" : "Upload Receipt Image"}
             </p>
-            <p className="text-slate-400 text-sm mt-1">
+            <p className="text-muted-foreground text-sm mt-1">
               Drag & drop or click to browse
             </p>
-            <p className="text-slate-500 text-xs mt-2">JPEG, PNG, WebP up to 10MB</p>
+            <p className="text-muted-foreground text-xs mt-2">JPEG, PNG, WebP up to 10MB</p>
           </div>
           <div className="flex items-center gap-2 mt-2">
             <Button
               type="button"
               variant="outline"
               size="sm"
-              className="border-white/20 hover:border-violet-400 text-slate-300"
+              className="border-border hover:border-primary text-foreground hover:bg-slate-50"
               onClick={(e) => { e.stopPropagation(); fileInputRef.current?.click(); }}
             >
               <Camera className="w-4 h-4 mr-2" />
@@ -168,7 +168,7 @@ export function ImageUploader({ onExtracted, isLoading, setIsLoading }: ImageUpl
         </div>
       ) : (
         <div className="space-y-4">
-          <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-black/20">
+          <div className="relative rounded-2xl overflow-hidden border border-border bg-slate-50">
             <Image
               src={uploadedImage.preview}
               alt="Receipt preview"
@@ -179,13 +179,13 @@ export function ImageUploader({ onExtracted, isLoading, setIsLoading }: ImageUpl
             {stage !== "done" && (
               <button
                 onClick={clearImage}
-                className="absolute top-3 right-3 p-1.5 rounded-full bg-black/60 hover:bg-red-500/80 transition-colors"
+                className="absolute top-3 right-3 p-1.5 rounded-full bg-black/60 hover:bg-destructive/90 transition-colors shadow-sm"
               >
                 <X className="w-4 h-4 text-white" />
               </button>
             )}
             {stage === "done" && (
-              <div className="absolute top-3 right-3 p-1.5 rounded-full bg-emerald-500/80">
+              <div className="absolute top-3 right-3 p-1.5 rounded-full bg-primary/90 shadow-sm">
                 <CheckCircle2 className="w-4 h-4 text-white" />
               </div>
             )}
@@ -194,13 +194,13 @@ export function ImageUploader({ onExtracted, isLoading, setIsLoading }: ImageUpl
           {(stage === "uploading" || stage === "extracting") && (
             <div className="space-y-2">
               <div className="flex items-center justify-between text-sm">
-                <span className="text-slate-400 flex items-center gap-2">
+                <span className="text-muted-foreground flex items-center gap-2 font-medium">
                   <Loader2 className="w-3.5 h-3.5 animate-spin" />
                   {stage === "uploading" ? "Preparing image..." : "AI is reading your receipt..."}
                 </span>
-                <span className="text-violet-400 font-medium">{progress}%</span>
+                <span className="text-primary font-bold">{progress}%</span>
               </div>
-              <Progress value={progress} className="h-1.5 bg-white/10" />
+              <Progress value={progress} className="h-1.5 bg-primary/10" />
             </div>
           )}
 
@@ -209,17 +209,17 @@ export function ImageUploader({ onExtracted, isLoading, setIsLoading }: ImageUpl
               id="extract-btn"
               onClick={handleExtract}
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-semibold py-3 rounded-xl shadow-lg shadow-violet-500/25 transition-all duration-300 hover:shadow-violet-500/40 hover:scale-[1.01]"
+              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-6 rounded-xl shadow-lg shadow-primary/25 transition-all duration-300 hover:shadow-primary/40 hover:-translate-y-0.5"
             >
-              <Sparkles className="w-4 h-4 mr-2" />
+              <Sparkles className="w-5 h-5 mr-2" />
               Extract with AI
             </Button>
           )}
 
           {stage === "done" && (
-            <div className="flex items-center gap-2 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-              <p className="text-emerald-400 text-sm font-medium">
+            <div className="flex items-center gap-2 p-3 rounded-xl bg-primary/10 border border-primary/20">
+              <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
+              <p className="text-primary text-sm font-medium">
                 Data extracted! Review and save below.
               </p>
             </div>
